@@ -8,11 +8,14 @@ chrome_options.add_argument('--hedless')
 driver = webdriver.Chrome()
 driver.get('https://www.magazineluiza.com.br/ssd-480gb-kingston-sata-rev-3-0-leituras-500mb-s-e-gravacoes-450mb-s-a400/p/220920100/in/ssdi/')
 sleep(3)
-produto = driver.find_element_by_xpath('/html/body/div[3]/div[5]/div[1]/div[2]/h1').text
-preçoatual = driver.find_element_by_xpath('/html/body/div[3]/div[5]/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/span[2]').text
+produto = driver.find_element_by_class_name('header-product__title').text
+preçoatual = driver.find_element_by_class_name('price-template__text').text
+preçoatual = preçoatual.replace(',', '.')
+preçoatual = float(preçoatual)
 preçoalvo = 300
 
-while preçoatual >= preçoalvo:
+print(produto)
+while preçoatual > preçoalvo:
     print(preçoatual)
-    sleep(1)
+    sleep(60)
 print('preço alvo atingido')
